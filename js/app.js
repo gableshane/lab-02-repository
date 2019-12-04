@@ -13,10 +13,10 @@ ThingWithHorns.prototype.renderToPage = function () {
   clone.find('img').attr('src', this.img);
   clone.find('img').attr('alt', this.keyword);
   clone.find('h3').text(this.title);
-  clone.find(':nth-child(3)').text(this.horns);
+  clone.find(':nth-child(3)').text(`Horns: ${this.horns}`);
   clone.find(':nth-child(4)').text(this.description)
   clone.removeAttr('id');
-  $('main').append(clone);
+  $('#photo-container').append(clone);
 }
 
 

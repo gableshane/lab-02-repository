@@ -1,3 +1,15 @@
 #photo-template {
   display: none;
 }
+#photo-container {
+  background-color: black;
+  margin: 30px;
+}
+img {
+  height: 200px;
+  width: 200px;
+}
+div {
+  border: 1px solid black;
+  height: 300px;
+}
