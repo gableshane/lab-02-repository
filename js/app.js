@@ -16,15 +16,15 @@ ThingWithHorns.prototype.renderToPage = function () {
   clone.find('img').attr('alt', this.keyword);
   clone.find('h3').text(this.title);
   clone.find(':nth-child(3)').text(`Horns: ${this.horns}`);
-  clone.find(':nth-child(4)').text(this.description)
-  clone.removeAttr('id');
+  clone.find(':nth-child(4)').text(this.description);
+  clone.attr('id', `${this.title}`);
   $('#photo-container').append(clone);
 }
 ThingWithHorns.prototype.createOptions = function (keyword) {
   let optionContainer = $('select');
   if (!optionList.includes(keyword)) {
     optionList.push(this.keyword)
-    optionContainer.append(`<option>${this.keyword}</option>`);
+    optionContainer.append(`<option val=${this.keyword}>${this.keyword}</option>`);
   }
 }
 
