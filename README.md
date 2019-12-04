@@ -30,6 +30,6 @@ Estimate of time needed to complete: No estimate
 
 Start time: 10:22
 
-Finish time: _____
+Finish time: 10:58
 
-Actual time needed to complete: _____
+Actual time needed to complete: 36 minutes
