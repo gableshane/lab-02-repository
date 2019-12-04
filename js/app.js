@@ -1,5 +1,7 @@
 'use strict';
 
+const optionList = []
+
 function ThingWithHorns (img_url, title, description, keyword, horns) {
   this.img = img_url;
   this.title = title;
@@ -18,6 +20,13 @@ ThingWithHorns.prototype.renderToPage = function () {
   clone.removeAttr('id');
   $('#photo-container').append(clone);
 }
+ThingWithHorns.prototype.createOptions = function (keyword) {
+  let optionContainer = $('select');
+  if (!optionList.includes(keyword)) {
+    optionList.push(this.keyword)
+    optionContainer.append(`<option>${this.keyword}</option>`);
+  }
+}
 
 
 $.get('data/page-1.json', 'json').then(
@@ -26,5 +35,6 @@ $.get('data/page-1.json', 'json').then(
     data.forEach( hornedObj => {
       let hornedThings = new ThingWithHorns(hornedObj.image_url, hornedObj.title, hornedObj.description, hornedObj.keyword, hornedObj.horns);
       hornedThings.renderToPage();
+      hornedThings.createOptions(hornedThings.keyword);
     });
   });
