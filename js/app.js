@@ -8,16 +8,23 @@ function ThingWithHorns (img_url, title, description, keyword, horns) {
   this.horns = horns;
 }
 
-ThingWithHorns.prototype.renderToPage = function {
-  //render to page
+ThingWithHorns.prototype.renderToPage = function () {
+  let clone = $('#photo-template').clone();
+  clone.find('img').attr('src', this.img);
+  clone.find('img').attr('alt', this.keyword);
+  clone.find('h3').text(this.title);
+  clone.find(':nth-child(3)').text(this.horns);
+  clone.find(':nth-child(4)').text(this.description)
+  clone.removeAttr('id');
+  $('main').append(clone);
 }
 
 
-$.get('data/page-1.json', 'JSON').then (
+$.get('data/page-1.json', 'json').then(
   (data) => {
+    console.log(data);
     data.forEach( hornedObj => {
-      let hornedThings = new ThingWithHorns(hornedObj.img_url, hornedObj.title, hornedObj.description, hornedObj.keyword, hornedObj.horns);
-      ThingWithHorns.renderToPage();
-    })
-  }
-)
+      let hornedThings = new ThingWithHorns(hornedObj.image_url, hornedObj.title, hornedObj.description, hornedObj.keyword, hornedObj.horns);
+      hornedThings.renderToPage();
+    });
+  });
