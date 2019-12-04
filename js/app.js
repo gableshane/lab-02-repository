@@ -43,15 +43,7 @@ $('select').on('change', function () {
 
   const optionText = $('select option:selected').val();
 
-
-  if ($('div').attr('id') === optionText) {
-    console.log($('div').attr('id'));
-    
-  }
-
   $('select > option').each(function() {
-    //alert(this.text + ' ' + this.value);
-
     if (optionText === this.text) {
       $(`#${this.text}`).show();
       console.log($(`#${this.text}`));
