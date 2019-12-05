@@ -1,6 +1,7 @@
 'use strict';
 
-const optionList = []
+const optionList = [];
+const hornedThingsTemplate = Handlebars.compile($('#horned-template').html());
 
 function ThingWithHorns(img_url, title, description, keyword, horns) {
   this.img = img_url;
@@ -11,14 +12,19 @@ function ThingWithHorns(img_url, title, description, keyword, horns) {
 }
 
 ThingWithHorns.prototype.renderToPage = function () {
-  let clone = $('#photo-template').clone();
+  /* let clone = $('#photo-template').clone();
   clone.find('img').attr('src', this.img);
   clone.find('img').attr('alt', this.keyword);
   clone.find('h3').text(this.title);
   clone.find(':nth-child(3)').text(`Horns: ${this.horns}`);
   clone.find(':nth-child(4)').text(this.description);
   clone.attr('id', `${this.keyword}`);
-  $('#photo-container').append(clone);
+  $('#photo-container').append(clone); */
+
+
+  const hornedThingHtml = hornedThingsTemplate(this);
+  console.log(hornedThingHtml);
+  $('#photo-container').append(hornedThingHtml);
 }
 
 ThingWithHorns.prototype.createOptions = function () {
@@ -46,7 +52,6 @@ $('select').on('change', function () {
   $('select > option').each(function() {
     if (optionText === this.text) {
       $(`#${this.text}`).show();
-      console.log($(`#${this.text}`));
     }
 });
 
