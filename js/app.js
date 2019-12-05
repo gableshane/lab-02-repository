@@ -61,6 +61,9 @@ function renderMain() {
       $(this).css('background-color', 'grey')
       $(this).children().css('background-color', 'grey')
     });
+    $('div').click(function() {
+      $(this).hide();
+    })
   });
 }
 
