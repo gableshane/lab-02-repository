@@ -10,7 +10,8 @@ div {
   border: 5px solid grey;
   border-radius: 20%;
   background-color: grey;
-  box-shadow: 1px 1px black;
+  box-shadow: 5px 5px black;
+  z-index: 1000;
 }
 
 img {
@@ -26,4 +27,5 @@ p {
 }
 h3 {
   background-color: grey;
+  padding: 5px;
 }
