@@ -58,3 +58,15 @@ Start time: 0945
 Finish time: 1030
 
 Actual time needed to complete: 45
+
+////////////////////////////////////////////////////////////////////////////////////////
+
+Number and name of feature: Sort Feature
+
+Estimate of time needed to complete: 2.5 hr
+
+Start time: 1000
+
+Finish time: 1200
+
+Actual time needed to complete: 2 hour
