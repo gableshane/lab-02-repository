@@ -2,7 +2,8 @@
 
 const optionList = [];
 const hornedThingsTemplate = Handlebars.compile($('#horned-template').html());
-let page = 'data/page-1.json'
+let page = 'data/page-1.json';
+let sortValue = 'title';
 
 function ThingWithHorns(img_url, title, description, keyword, horns) {
   this.img = img_url;
@@ -13,22 +14,12 @@ function ThingWithHorns(img_url, title, description, keyword, horns) {
 }
 
 ThingWithHorns.prototype.renderToPage = function () {
-  /* let clone = $('#photo-template').clone();
-  clone.find('img').attr('src', this.img);
-  clone.find('img').attr('alt', this.keyword);
-  clone.find('h3').text(this.title);
-  clone.find(':nth-child(3)').text(`Horns: ${this.horns}`);
-  clone.find(':nth-child(4)').text(this.description);
-  clone.attr('id', `${this.keyword}`);
-  $('#photo-container').append(clone); */
-
-
   const hornedThingHtml = hornedThingsTemplate(this);
   $('#photo-container').append(hornedThingHtml);
 }
 
 ThingWithHorns.prototype.createOptions = function () {
-  let optionContainer = $('select');
+  let optionContainer = $('#filter');
   if (!optionList.includes(this.keyword)) {
     optionList.push(this.keyword)
     optionContainer.append(`<option val=${this.keyword}>${this.keyword}</option>`);
@@ -38,6 +29,24 @@ ThingWithHorns.prototype.createOptions = function () {
 function renderMain() {
   $.get(page, 'json').then(
     (data) => {
+      data.sort( (a , b ) => {
+        if (sortValue === 'title') {
+          if (a.title > b.title) {
+            return 1;
+          } else if (a.title < b.title) {
+            return -1;
+          } else {
+            return 0;
+          })
+          } else if (sortValue === 'horns') {
+          if (a.horns > b.horns) {
+            return 1;
+          } else if (a.horns < b.horns) {
+            return -1;
+          } else {
+            return 0;
+        }
+    }
       data.forEach(hornedObj => {
         let hornedThings = new ThingWithHorns(hornedObj.image_url, hornedObj.title, hornedObj.description, hornedObj.keyword, hornedObj.horns);
         hornedThings.renderToPage();
@@ -46,21 +55,30 @@ function renderMain() {
     });
 }
 
-$('select').on('change', function () {
+$('#filter').on('change', function () {
   $('div').hide();
 
-  const optionText = $('select option:selected').val();
-  $('select > option').each(function() {
+  const optionText = $('#filter option:selected').val();
+  $('#filter > option').each(function() {
     if (optionText === this.text) {
       $(`.${this.text}`).show();
     }
   });
 });
 $('button').on('click', function() {
-  page = 'data/page-2.json';
-  // $('div').hide();
+  if (page === 'data/page-1.json' ) {
+    page = 'data/page-2.json';
+  } else {
+    page = 'data/page-1.json'
+  }
   $('div').attr('class', 'remove');
   $('.remove').remove();
   renderMain();
 })
 renderMain();
+
+$('#sort').on('change', () => {
+  sortValue = $('#sort option:selected').val()
+  // console.log(sortValue);
+  renderMain();
+})
