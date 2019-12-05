@@ -23,7 +23,6 @@ ThingWithHorns.prototype.renderToPage = function () {
 
 
   const hornedThingHtml = hornedThingsTemplate(this);
-  console.log(hornedThingHtml);
   $('#photo-container').append(hornedThingHtml);
 }
 
@@ -51,7 +50,10 @@ $('select').on('change', function () {
 
   $('select > option').each(function() {
     if (optionText === this.text) {
-      $(`#${this.text}`).show();
+      console.log(optionText);
+      console.log(this.text);
+      $(`.${this.text}`).show();
+      console.log(`.${this.text}`)
     }
 });
 
