@@ -1,15 +1,18 @@
-#photo-template {
-  display: none;
-}
 #photo-container {
-  background-color: black;
-  margin: 30px;
+  display: flex;
+  flex-flow: row wrap;
 }
+
+div {
+  margin: 1% 2% 1% 2%;
+  height: 325px;
+  text-align: center;
+  border: 5px solid black;
+  border-radius: 10%;
+}
+
 img {
+  margin-top: 5%;
   height: 200px;
   width: 200px;
-}
-div {
-  border: 1px solid black;
-  height: 300px;
 }
