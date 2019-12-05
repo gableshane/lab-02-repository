@@ -2,6 +2,7 @@
 
 const optionList = [];
 const hornedThingsTemplate = Handlebars.compile($('#horned-template').html());
+let page = 'data/page-1.json'
 
 function ThingWithHorns(img_url, title, description, keyword, horns) {
   this.img = img_url;
@@ -34,29 +35,32 @@ ThingWithHorns.prototype.createOptions = function () {
   }
 }
 
-$.get('data/page-1.json', 'json').then(
-  (data) => {
-    data.forEach(hornedObj => {
-      let hornedThings = new ThingWithHorns(hornedObj.image_url, hornedObj.title, hornedObj.description, hornedObj.keyword, hornedObj.horns);
-      hornedThings.renderToPage();
-      hornedThings.createOptions();
+function renderMain() {
+  $.get(page, 'json').then(
+    (data) => {
+      data.forEach(hornedObj => {
+        let hornedThings = new ThingWithHorns(hornedObj.image_url, hornedObj.title, hornedObj.description, hornedObj.keyword, hornedObj.horns);
+        hornedThings.renderToPage();
+        hornedThings.createOptions();
+      });
     });
-  });
+}
 
 $('select').on('change', function () {
   $('div').hide();
 
   const optionText = $('select option:selected').val();
-
   $('select > option').each(function() {
     if (optionText === this.text) {
-      console.log(optionText);
-      console.log(this.text);
       $(`.${this.text}`).show();
-      console.log(`.${this.text}`)
     }
+  });
 });
-
-
-});
-
+$('button').on('click', function() {
+  page = 'data/page-2.json';
+  // $('div').hide();
+  $('div').attr('class', 'remove');
+  $('.remove').remove();
+  renderMain();
+})
+renderMain();
