@@ -5,6 +5,8 @@ const hornedThingsTemplate = Handlebars.compile($('#horned-template').html());
 let page = 'data/page-1.json';
 let sortValue = 'title';
 
+
+
 function ThingWithHorns(img_url, title, description, keyword, horns) {
   this.img = img_url;
   this.title = title;
@@ -50,6 +52,15 @@ function renderMain() {
       hornedThings.renderToPage();
       hornedThings.createOptions();
     });
+
+    $('div').mouseenter(function(){
+      $(this).css('background-color', 'DarkGray')
+      $(this).children().css('background-color', 'DarkGray')
+    });
+    $('div').mouseleave(function(){
+      $(this).css('background-color', 'grey')
+      $(this).children().css('background-color', 'grey')
+    });
   });
 }
 
@@ -73,7 +84,6 @@ $('button').on('click', function() {
   $('.remove').remove();
   renderMain();
 });
-renderMain();
 
 $('#sort').on('change', () => {
   sortValue = $('#sort option:selected').val();
@@ -81,3 +91,6 @@ $('#sort').on('change', () => {
   $('.remove').remove();
   renderMain();
 });
+
+
+renderMain();
